@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atakeddi <atakeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 18:40:23 by atakeddi          #+#    #+#             */
-/*   Updated: 2021/12/10 19:30:00 by atakeddi         ###   ########.fr       */
+/*   Created: 2021/12/10 19:30:54 by atakeddi          #+#    #+#             */
+/*   Updated: 2021/12/10 19:40:09 by atakeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_buffer(int fd, char *str)
 {
@@ -95,15 +95,53 @@ char	*get_new_rest(char *rest)
 
 char	*get_next_line(int fd)
 {
-	static char	*rest;
+	static char	*rest[10240];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE > 10240|BUFFER_SIZE <= 0)
 		return (NULL);
-	rest = read_buffer(fd, rest);
-	if (!rest)
+	rest[fd] = read_buffer(fd, rest[fd]);
+	if (!rest[fd])
 		return (NULL);
-	line = get_line(rest);
-	rest = get_new_rest(rest);
+	line = get_line(rest[fd]);
+	rest[fd] = get_new_rest(rest[fd]);
 	return (line);
+}
+#include <fcntl.h>
+
+int main()
+{
+    int fd1;
+    int fd2;
+    int fd5;
+    int fd4;
+    int fd3;
+    
+    fd1 = open("fd1.txt",O_CREAT | O_RDWR);
+    fd2 = open("fd2.txt",O_CREAT | O_RDWR);
+    fd3 = open("fd3.txt",O_CREAT | O_RDWR);
+    fd4 = open("fd4.txt",O_CREAT | O_RDWR);
+    fd5 = open("fd5.txt",O_CREAT | O_RDWR);
+
+    printf("%s",get_next_line(fd1));
+    printf("%s",get_next_line(fd2));
+    printf("%s",get_next_line(fd3));
+    printf("%s",get_next_line(fd4));
+    printf("%s",get_next_line(fd5));
+    printf("%s",get_next_line(fd1));
+    printf("%s",get_next_line(fd2));
+    printf("%s",get_next_line(fd3));
+    printf("%s",get_next_line(fd4));
+    printf("%s",get_next_line(fd5));
+    printf("%s",get_next_line(fd1));
+    printf("%s",get_next_line(fd2));
+    printf("%s",get_next_line(fd3));
+    printf("%s",get_next_line(fd4));
+    printf("%s",get_next_line(fd5));
+    printf("%s",get_next_line(fd1));
+    printf("%s",get_next_line(fd2));
+    printf("%s",get_next_line(fd3));
+    printf("%s",get_next_line(fd4));
+    printf("%s",get_next_line(fd5));
+    
 }

@@ -6,7 +6,7 @@
 /*   By: atakeddi <atakeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:35:43 by atakeddi          #+#    #+#             */
-/*   Updated: 2021/12/07 18:57:25 by atakeddi         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:27:03 by atakeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,67 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*move(char *s1, char *s2, char *s)
 {
-	char	*s3;
-	int		i;
+	int	a;
+	int	i;
 
-	i = 0 ;
-	if (!s1 || !s2)
-		return (NULL);
-	s3 = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!s3)
-		return (NULL);
-	while (*s1)
+	a = ft_strlen(s1);
+	i = 0;
+	if (s1)
 	{
-		s3[i] = *s1;
-		s1++;
+		while (s1[i])
+		{
+			s[i] = s1[i];
+			i++;
+		}
+	}
+	i = 0;
+	while (s2[i])
+	{
+		s[a] = s2[i];
+		a++;
 		i++;
 	}
-	while (*s2)
+	s[a] = '\0';
+	return (s);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	int		a;
+	int		i;
+	char	*s;
+
+	i = 0;
+	if (!s1)
 	{
-		s3[i] = *s2;
-		s2++;
-		i++;
+		s1 = (char *)malloc(1);
+		s1[0] = '\0';
 	}
-	s3[i] = '\0';
-	return (s3);
+	if (!s2)
+		return (NULL);
+	a = ft_strlen(s1);
+	s = (char *)malloc(a + ft_strlen(s2) + 1);
+	if (s == NULL)
+		return (NULL);
+	s = move(s1, s2, s);
+	free(s1);
+	return (s);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
+	int	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i] != (char)c)
 	{
 		if (s[i] == '\0')
 			return (NULL);
 		i++;
 	}
-	return ((char *)&s[i]);
+	return ((char *)s);
 }
