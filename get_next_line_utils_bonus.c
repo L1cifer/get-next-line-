@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atakeddi <atakeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:35:43 by atakeddi          #+#    #+#             */
-/*   Updated: 2021/12/11 12:51:10 by atakeddi         ###   ########.fr       */
+/*   Updated: 2021/12/10 19:52:38 by atakeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const	char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t	len;
+	size_t	i;
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (*s++)
-		len++;
-	return (len);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 static char	*move(char *s1, char *s2, char *s)
@@ -75,13 +73,16 @@ char	*ft_strjoin(char *s1, char *s2)
 
 char	*ft_strchr(const char *s, int c)
 {
+	int	i;
+
+	i = 0;
 	if (!s)
 		return (NULL);
-	while (*s != (char)c)
+	while (s[i] != (char)c)
 	{
-		if (*s == '\0')
+		if (s[i] == '\0')
 			return (NULL);
-		s++;
+		i++;
 	}
 	return ((char *)s);
 }

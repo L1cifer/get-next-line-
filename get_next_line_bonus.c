@@ -6,7 +6,7 @@
 /*   By: atakeddi <atakeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:30:54 by atakeddi          #+#    #+#             */
-/*   Updated: 2021/12/10 19:40:09 by atakeddi         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:30:06 by atakeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*read_buffer(int fd, char *str)
 	c = 1;
 	while (!ft_strchr(str, '\n') && c)
 	{
-		c = read(fd, buff, BUFFER_SIZE);
+		c = `d(fd, buff, BUFFER_SIZE);
 		if (c == -1)
 		{
 			free(buff);
@@ -81,8 +81,8 @@ char	*get_new_rest(char *rest)
 		free(rest);
 		return (NULL);
 	}
-	len = ft_strlen(&rest[i + 1] + 1);
-	new_rest = (char *)malloc(sizeof(char) * len);
+	len = ft_strlen(&rest[i + 1]);
+	new_rest = (char *)malloc(sizeof(char) * len + 1);
 	if (!new_rest)
 		return (NULL);
 	i++;
@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 	static char	*rest[10240];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE > 10240|BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 10240 | BUFFER_SIZE <= 0)
 		return (NULL);
 	rest[fd] = read_buffer(fd, rest[fd]);
 	if (!rest[fd])
@@ -106,42 +106,4 @@ char	*get_next_line(int fd)
 	line = get_line(rest[fd]);
 	rest[fd] = get_new_rest(rest[fd]);
 	return (line);
-}
-#include <fcntl.h>
-
-int main()
-{
-    int fd1;
-    int fd2;
-    int fd5;
-    int fd4;
-    int fd3;
-    
-    fd1 = open("fd1.txt",O_CREAT | O_RDWR);
-    fd2 = open("fd2.txt",O_CREAT | O_RDWR);
-    fd3 = open("fd3.txt",O_CREAT | O_RDWR);
-    fd4 = open("fd4.txt",O_CREAT | O_RDWR);
-    fd5 = open("fd5.txt",O_CREAT | O_RDWR);
-
-    printf("%s",get_next_line(fd1));
-    printf("%s",get_next_line(fd2));
-    printf("%s",get_next_line(fd3));
-    printf("%s",get_next_line(fd4));
-    printf("%s",get_next_line(fd5));
-    printf("%s",get_next_line(fd1));
-    printf("%s",get_next_line(fd2));
-    printf("%s",get_next_line(fd3));
-    printf("%s",get_next_line(fd4));
-    printf("%s",get_next_line(fd5));
-    printf("%s",get_next_line(fd1));
-    printf("%s",get_next_line(fd2));
-    printf("%s",get_next_line(fd3));
-    printf("%s",get_next_line(fd4));
-    printf("%s",get_next_line(fd5));
-    printf("%s",get_next_line(fd1));
-    printf("%s",get_next_line(fd2));
-    printf("%s",get_next_line(fd3));
-    printf("%s",get_next_line(fd4));
-    printf("%s",get_next_line(fd5));
-    
 }
