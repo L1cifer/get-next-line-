@@ -6,7 +6,7 @@
 /*   By: atakeddi <atakeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 19:30:54 by atakeddi          #+#    #+#             */
-/*   Updated: 2021/12/11 17:30:06 by atakeddi         ###   ########.fr       */
+/*   Updated: 2021/12/12 17:16:53 by atakeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*read_buffer(int fd, char *str)
 	c = 1;
 	while (!ft_strchr(str, '\n') && c)
 	{
-		c = `d(fd, buff, BUFFER_SIZE);
+		c = read(fd, buff, BUFFER_SIZE);
 		if (c == -1)
 		{
 			free(buff);

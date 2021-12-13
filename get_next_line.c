@@ -6,7 +6,7 @@
 /*   By: atakeddi <atakeddi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 18:40:23 by atakeddi          #+#    #+#             */
-/*   Updated: 2021/12/12 16:01:37 by atakeddi         ###   ########.fr       */
+/*   Updated: 2021/12/12 17:11:47 by atakeddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,4 @@ char	*get_next_line(int fd)
 	line = get_line(rest);
 	rest = get_new_rest(rest);
 	return (line);
-}
-#include <fcntl.h>
-int main()
-{
-	int fd;
-	fd = open("t.txt",O_CREAT | O_RDWR);
-	printf("%s",get_next_line(fd));
 }
